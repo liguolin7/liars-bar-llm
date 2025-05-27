@@ -195,3 +195,7 @@ cython_debug/
 config.json
 api_keys.json
 .env.local
+
+# 项目特定排除文件夹
+.cursor/
+DSAA-6000Q Project Template (overleaf_latex)/
