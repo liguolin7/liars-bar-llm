@@ -199,3 +199,6 @@ api_keys.json
 # 项目特定排除文件夹
 .cursor/
 DSAA-6000Q Project Template (overleaf_latex)/
+
+# 项目特定排除文件
+PPTContent.md
