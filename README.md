@@ -1,88 +1,267 @@
 # Liars Bar LLM
 
-一个由大语言模型驱动的AI版骗子酒馆对战框架
+<div align="center">
 
-## 文件结构
+**🎯 基于大语言模型的多智能体策略博弈研究框架**
 
-程序主要分为两部分，游戏主体和分析工具
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Analysis](https://img.shields.io/badge/Analysis-20%2B%20Metrics-orange.svg)](#核心功能)
+[![Visualization](https://img.shields.io/badge/Visualization-中文本地化-red.svg)](#特色功能亮点)
 
-### 游戏主体
+*通过策略博弈揭示大语言模型的决策机制与行为特征*
 
-`game.py` 骗子酒馆游戏主程序
+</div>
 
-`player.py` 参与游戏的LLM智能体
+## 🚀 项目概述
 
-`game_record.py` 用于保存和提取游戏记录
+**Liars Bar LLM** 是一个创新的多智能体策略博弈研究框架，让多个大语言模型在骗子酒馆（Liars Bar）游戏中进行策略对抗。项目不仅实现了完整的游戏逻辑，更重要的是提供了一套全面的分析体系，从**欺骗能力**、**存活能力**、**决策质量**三个维度深度评估LLM的博弈表现。
 
-`llm_client.py` 用于配置模型接口和发起LLM请求
+### 🎯 为什么选择骗子酒馆？
 
-`multi_game_runner.py` 用于批量运行多轮游戏
+骗子酒馆是评估LLM策略思维的理想场景：
+- **信息不完全**：需要基于有限信息进行推理判断
+- **策略多样性**：可采取保守或激进的不同策略
+- **心理博弈**：需要理解对手意图和欺骗行为
+- **动态适应**：要求根据局势变化调整策略
 
-### 分析工具
+### 🏆 研究价值
 
-`game_analyze.py` 用于统计所有对局数据
+- **LLM能力新维度**：超越传统基准测试，评估模型的策略思维和博弈智能
+- **行为机制洞察**：揭示不同模型的决策模式和推理特征
+- **学术研究支持**：提供严谨的统计分析和中文本地化图表
+- **模型比较基准**：建立标准化的LLM策略能力评估体系
 
-`player_matchup_analyze.py` 用于提取互为对手的AI间的对局记录进行分析
+## ✨ 核心功能
 
-`json_convert.py` 用于将json游戏记录转为可读文本
+### 🎮 多模型对战系统
+- **广泛模型支持**：ChatGPT、Claude、DeepSeek、Gemini等主流LLM
+- **统一API接口**：支持New API/One API等API管理平台
+- **稳定对战机制**：自动重试和异常处理，确保数据质量
+- **批量运行能力**：支持大规模实验数据收集
 
-## 配置
+### 📊 三维评估体系
+- **欺骗能力维度**：诚实率、欺骗率、虚张声势率、欺骗成功率等
+- **存活能力维度**：存活率、平均积分、淘汰率、排名表现等  
+- **决策质量维度**：质疑精确度、召回率、决策合理性等
+- **20+量化指标**：全面量化模型在博弈中的表现
 
-使用conda环境配置相应依赖包：
+### 🧠 深度决策分析
+- **推理过程追踪**：结构化提取LLM的思考过程和决策链
+- **策略演变监测**：分析模型在游戏中的策略变化
+- **信心水平评估**：量化模型对自身判断的确信程度
+- **情绪变化分析**：识别决策过程中的情绪波动
+
+### 🎯 行为模式识别
+- **自动策略聚类**：基于行为特征识别四种典型策略类型
+  - **谨慎型**（ChatGPT）：高诚实率，低风险偏好
+  - **进攻型**（Gemini）：高欺骗率，积极冒险
+  - **平衡型**（DeepSeek）：策略均衡，适度风险
+  - **适应型**（Claude）：高成功率，策略灵活
+- **对手适应性分析**：评估模型针对不同对手的策略调整
+- **策略雷达图**：直观展示模型的策略特征分布
+
+### 📈 统计显著性验证
+- **参数检验**：t检验、ANOVA、Tukey HSD事后检验
+- **非参数检验**：Mann-Whitney U、Kruskal-Wallis H、Dunn检验
+- **效应量分析**：量化模型间差异的实际意义
+- **置信区间估计**：提供统计结果的可靠性评估
+
+### 🎨 可视化与报告
+- **中文本地化**：所有图表支持中文显示，适合学术报告
+- **多样化图表**：雷达图、热力图、箱线图、散点图等
+- **一站式分析**：单命令生成完整分析报告
+- **模块化输出**：支持选择性运行特定分析模块
+
+## 🏗️ 系统架构
 
 ```
-pip install openai
+Liars Bar LLM
+├── 🎮 游戏核心系统
+│   ├── game.py              # 游戏主逻辑
+│   ├── player.py            # LLM智能体
+│   ├── game_record.py       # 数据记录
+│   ├── llm_client.py        # API接口
+│   └── multi_game_runner.py # 批量运行
+│
+├── 📊 分析系统
+│   ├── analyze_all.py       # 一站式分析入口 ⭐
+│   ├── metrics.py           # 指标计算
+│   ├── decision_tracker.py  # 决策追踪
+│   ├── behavior_analysis.py # 行为聚类
+│   └── statistical_analysis.py # 统计检验
+│
+└── 🎨 可视化系统
+    ├── visualize_metrics.py # 指标可视化
+    ├── combine_strategy_radar.py # 策略雷达图
+    └── localize_charts.py   # 图表本地化
 ```
 
-本项目的API配置在`llm_client.py`中。
+## 🚀 快速开始
 
-本项目利用了New API https://github.com/Calcium-Ion/new-api?tab=readme-ov-file 配置了统一的接口调用格式。使用时需自行配置相应模型的API接口。
+### 1. 环境配置
 
-也可以采用类似的API管理项目One API https://github.com/songquanpeng/one-api 实现统一的接口调用。
+```bash
+# 克隆项目
+git clone <repository-url>
+cd liars-bar-llm
 
-## 使用方法
-
-### 运行
-
-完成项目配置后，在`game.py`和`multi_game_runner.py`主程序入口的`player_configs`中设置正确的模型名称
-
-运行单局游戏：
+# 安装依赖
+pip install -r requirements.txt
 ```
+
+### 2. API配置
+
+在 `llm_client.py` 中配置您的API密钥和端点：
+
+```python
+# 支持New API、One API等统一接口
+# 配置您的API_KEY和BASE_URL
+```
+
+### 3. 运行游戏
+
+```bash
+# 单局游戏
 python game.py
+
+# 批量运行（推荐50局以上获得稳定结果）
+python multi_game_runner.py -n 50
 ```
 
-运行多局游戏：
-```
-python multi_game_runner.py -n 10
-```
-在`-n`后指定你希望运行的游戏局数，默认为10局
+### 4. 分析结果
 
-### 分析
+```bash
+# 一键完整分析
+python analyze_all.py --game_records game_records --output_dir analysis_results
 
-游戏记录会以json形式保存在目录下的`game_records`文件夹中
-
-将json文件转为可读性更强的文本格式，转换后的文件会保存在目录下的`converted_game_records`文件夹中
-
-```
-python json_convert.py
+# 模块化分析
+python analyze_all.py --metrics_only    # 仅指标分析
+python analyze_all.py --behavior_only   # 仅行为分析
+python analyze_all.py --stats_only      # 仅统计分析
 ```
 
-提取所有游戏中AI之间两两对决的对局，转换后的文件会保存在目录下的`matchup_records`文件夹中
+## 📊 分析结果展示
 
-```
-python player_matchup_analyze.py
-```
+### 指标分析 (`analysis_results/metrics/`)
+- **综合能力雷达图**：多维度性能对比
+- **欺骗策略分析**：诚实率、欺骗成功率等
+- **存活能力评估**：积分、排名、淘汰率
+- **决策质量评价**：质疑精确度、召回率
 
-统计并打印所有的对局数据
+### 行为分析 (`analysis_results/behavior_analysis/`)
+- **策略类型聚类**：四种典型策略识别
+- **合成策略雷达图**：模型策略特征对比
+- **策略演变追踪**：游戏过程中的策略变化
+- **对手适应性**：针对不同对手的策略调整
 
-```
-python game_analyze.py
-```
+### 决策分析 (`analysis_results/decision_analysis/`)
+- **推理过程分析**：决策链和思考深度
+- **信心水平评估**：判断确信程度
+- **虚张声势趋势**：欺骗策略变化
+- **决策风格对比**：不同模型的推理特点
 
-## Demo
+### 统计分析 (`analysis_results/statistical_analysis/`)
+- **显著性检验**：模型间差异的统计验证
+- **效应量分析**：差异的实际意义评估
+- **置信区间**：结果的可靠性评估
+- **多重比较**：成对模型差异分析
 
-项目已将 DeepSeek-R1、o3-mini、Gemini-2-flash-thinking、Claude-3.7-Sonnet 四个模型作为玩家运行了50局，记录存放在`demo_records`文件夹中。
+## 🎯 实验结果示例
 
-## 已知问题
+基于50局对战数据的分析结果：
 
-模型在出牌和质疑阶段的输出可能不稳定，当输出无法满足游戏规定时，会自动重试。如果多次因为输出问题中断运行，可在`player.py`的`choose_cards_to_play`和`decide_challenge`中增加调用大模型的重试次数，或修改`prompt`文件夹中的`play_card_prompt_template.txt`和`challenge_prompt_template.txt`提示词强化对输出格式的限制（可能对模型的推理能力有一定影响）。
+| 模型 | 胜率 | 欺骗成功率 | 质疑精确度 | 策略类型 |
+|------|------|------------|------------|----------|
+| **DeepSeek** | 44% | 23% | 23% | 平衡型 |
+| **Claude** | 26% | 38% | 5% | 适应型 |
+| **ChatGPT** | 22% | 35% | 13% | 谨慎型 |
+| **Gemini** | 8% | 39% | 19% | 进攻型 |
+
+**关键发现**：
+- DeepSeek在综合表现上领先，展现出优秀的策略平衡能力
+- Claude虽然胜率中等，但欺骗成功率最高，显示出强大的策略适应性
+- ChatGPT采取保守策略，诚实率高达92%
+- Gemini策略最为激进，但效果有限
+
+## 🌟 特色亮点
+
+### 1. 🎯 创新评估方法
+- 首个基于策略博弈的LLM评估框架
+- 超越传统基准测试，关注实际智能表现
+- 多维度量化评估体系
+
+### 2. 🧠 深度行为分析
+- 自动识别策略类型和行为模式
+- 追踪决策过程和推理链
+- 量化策略适应性和灵活性
+
+### 3. 📊 严谨统计方法
+- 多种统计检验验证结果可靠性
+- 效应量分析评估差异实际意义
+- 置信区间提供不确定性评估
+
+### 4. 🎨 专业可视化
+- 全中文本地化图表
+- 多样化可视化形式
+- 直接适用于学术报告
+
+### 5. 🔧 易用性设计
+- 一站式分析流程
+- 模块化功能选择
+- 详细文档和示例
+
+## 📚 Demo数据
+
+项目包含**DeepSeek-R1**、**o3-mini**、**Claude-3.7-Sonnet**、**Gemini-2-flash-thinking**四个模型的50局对战记录，可直接用于：
+- 测试分析功能
+- 学习使用方法
+- 验证分析结果
+- 作为研究基线
+
+## ⚠️ 注意事项
+
+### 模型输出稳定性
+- 部分模型输出可能不稳定，系统已内置自动重试机制
+- 如遇频繁中断，可调整 `player.py` 中的重试次数
+- 可优化 `prompt/` 目录中的提示词以提高输出稳定性
+
+### 决策分析完整性
+- 决策分析依赖模型的思考过程记录
+- 部分模型可能缺少详细推理过程
+- 系统会尽力从有限信息中提取有价值的分析结果
+
+### 统计分析要求
+- 建议至少30局游戏以获得稳定的统计结果
+- 50局以上可获得更可靠的分析结论
+- 大规模实验（100+局）可提供更精确的模型比较
+
+## 🤝 贡献指南
+
+欢迎贡献代码、报告问题或提出改进建议：
+
+1. **新模型支持**：在 `llm_client.py` 中添加新的LLM接口
+2. **分析指标扩展**：在 `metrics.py` 中添加新的评估指标
+3. **可视化改进**：优化图表设计和交互体验
+4. **文档完善**：改进使用说明和API文档
+
+## 📄 许可证
+
+本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
+
+## 📞 联系方式
+
+如有问题或建议，请通过以下方式联系：
+- 提交 Issue
+- 发起 Pull Request
+- 邮件联系：[您的邮箱]
+
+---
+
+<div align="center">
+
+**🎯 让我们一起探索大语言模型的策略智能！**
+
+*如果这个项目对您有帮助，请给我们一个 ⭐*
+
+</div>

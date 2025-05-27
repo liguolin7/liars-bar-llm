@@ -2,6 +2,7 @@ import random
 from typing import List, Optional, Dict
 from player import Player
 from game_record import GameRecord, PlayerInitialState
+from decision_tracker import DecisionTracker  # 导入决策追踪器
 
 class Game:
     def __init__(self, player_configs: List[Dict[str, str]]) -> None:
@@ -27,6 +28,9 @@ class Game:
         self.game_record: GameRecord = GameRecord()
         self.game_record.start_game([p.name for p in self.players])
         self.round_count = 0
+        
+        # 创建决策追踪器
+        self.decision_tracker = DecisionTracker()
 
     def _create_deck(self) -> List[str]:
         """创建并洗牌牌组"""
@@ -166,6 +170,11 @@ class Game:
             print(f"\n{winner.name} 获胜！")
             # 记录胜利者并保存游戏记录
             self.game_record.finish_game(winner.name)
+            
+            # 保存决策分析结果
+            self.decision_tracker.save_decision_analysis(self.game_record.game_id)
+            self.decision_tracker.export_decision_data_to_csv()
+            
             self.game_over = True
             return True
         return False
@@ -214,6 +223,16 @@ class Game:
             behavior=play_result["behavior"],
             next_player=next_player.name,
             play_thinking=reasoning
+        )
+        
+        # 使用决策追踪器记录出牌决策
+        self.decision_tracker.track_play_decision(
+            player_name=current_player.name,
+            round_id=self.round_count,
+            target_card=self.target_card,
+            play_cards=play_result["played_cards"].copy(),
+            hand_cards=current_player.hand.copy(),
+            reasoning_text=reasoning
         )
 
         return play_result["played_cards"]
@@ -268,6 +287,16 @@ class Game:
                 challenge_thinking=reasoning
             )
             
+            # 使用决策追踪器记录质疑决策
+            self.decision_tracker.track_challenge_decision(
+                player_name=next_player.name,
+                round_id=self.round_count,
+                challenged_player=current_player.name,
+                was_challenged=True,
+                challenge_success=not is_valid,
+                reasoning_text=reasoning
+            )
+            
             # 根据验证结果返回需要受罚的玩家
             return next_player if is_valid else current_player
         else:
@@ -278,6 +307,17 @@ class Game:
                 result=None,
                 challenge_thinking=reasoning
             )
+            
+            # 使用决策追踪器记录不质疑决策
+            self.decision_tracker.track_challenge_decision(
+                player_name=next_player.name,
+                round_id=self.round_count,
+                challenged_player=current_player.name,
+                was_challenged=False,
+                challenge_success=None,
+                reasoning_text=reasoning
+            )
+            
             return None
 
     def handle_system_challenge(self, current_player: Player) -> None:
@@ -393,8 +433,16 @@ class Game:
         self.deal_cards()
         self.choose_target_card()
         self.start_round_record()
-        while not self.game_over:
-            self.play_round()
+        try:
+            while not self.game_over:
+                self.play_round()
+        except Exception as e:
+            print(f"游戏发生错误: {str(e)}")
+        finally:
+            # 即使发生错误，也尝试保存决策分析
+            if not self.game_over:
+                self.decision_tracker.save_decision_analysis(self.game_record.game_id)
+                self.decision_tracker.export_decision_data_to_csv()
 
 if __name__ == '__main__':
     # 配置玩家信息, 其中model为你通过API调用的模型名称
