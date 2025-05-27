@@ -1,0 +1,8 @@
+player_name,decision_type,round_id,target_card,played_cards,remaining_cards,is_bluffing,bluff_type,challenged_player,was_challenged,challenge_success,observed_player,confidence
+Claude,challenge,1,,,,,,ChatGPT,True,False,,0.6
+Claude,challenge,2,,,,,,ChatGPT,False,,,0.3
+Claude,play,2,A,A,"Q,Q,A,Joker",False,诚实,,,,,0.5
+Claude,play,2,A,"A,Joker","Q,Q",False,诚实,,,,,0.5
+Claude,challenge,4,,,,,,ChatGPT,False,,,0.5
+Claude,play,4,Q,"Q,Q","A,K,K",False,诚实,,,,,0.5
+Claude,play,6,K,"Q,Q","A,K,Joker",True,纯虚张,,,,,0.5

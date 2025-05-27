@@ -1,0 +1,4 @@
+player_name,decision_type,round_id,target_card,played_cards,remaining_cards,is_bluffing,bluff_type,challenged_player,was_challenged,challenge_success,observed_player,confidence
+Gemini,challenge,2,,,,,,Claude,False,,,0.8
+Gemini,challenge,2,,,,,,Claude,True,False,,0.8
+Gemini,play,2,A,A,"K,Q,A,Q",False,诚实,,,,,0.5
